@@ -1,1 +1,5 @@
 gtfs-realtime-bindings
+python-dotenv
+locationsharinglib
+requests
+tablib
