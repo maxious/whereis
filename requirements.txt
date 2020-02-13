@@ -3,3 +3,4 @@ python-dotenv
 locationsharinglib
 requests
 tablib
+orjson

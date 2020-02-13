@@ -8,4 +8,5 @@ https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/vehicle-posi
 
 ## TODO
 google maps api coming home announcement between 7-9pm weekdays
-train to google maps location correlation with links to anytrip (default T2, optionally all)
+train to google maps location correlation with links to anytrip 
+- filter to IWL_1* and BMT_1* ie Central to *
