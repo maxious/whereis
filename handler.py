@@ -1,7 +1,10 @@
 import json
-
+from whereis import maps, trains
 
 def hello(event, context):
+
+    people_latlons = maps.get_people_latlons()
+    train_latlons = trains.get_t2_bmt_latlons()
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
         "input": event
@@ -13,12 +16,3 @@ def hello(event, context):
     }
 
     return response
-
-    # Use this code if you don't use the http event with the LAMBDA-PROXY
-    # integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
-    }
-    """
