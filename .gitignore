@@ -21,4 +21,5 @@ var/
 
 .env
 cookies.txt
+data/gtfs.zip
 gtfs.zip
