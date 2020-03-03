@@ -2,6 +2,7 @@ from google.transit import gtfs_realtime_pb2
 import orjson
 import requests
 import os
+from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv(verbose=True)
 
@@ -27,10 +28,11 @@ def get_feed_messages(mock_feed=False):
 
 def get_train_latlons(feed=get_feed_messages()):
   latlons = {}
-  with open('/home/maxious/whereis/data/trips.json', 'r') as f:
-    trip_to_route = orjson.loads(f.read())
+
   for entity in feed.entity:
     if entity.HasField('vehicle'):
+        # with open('/home/maxious/whereis/data/trips.json', 'r') as f:
+        #     trip_to_route = orjson.loads(f.read())
         # try:
         #     trip_name, timetable_id, timetable_version_id, dop_ref, set_type, number_of_cars, trip_instance = entity.vehicle.trip.trip_id.split(
         #         '.')
@@ -40,7 +42,7 @@ def get_train_latlons(feed=get_feed_messages()):
         #     entity.vehicle.trip.trip_id, 'Unknown Route'))
         # print(trip_name, entity.vehicle.position.latitude,
         #       entity.vehicle.position.longitude)
-        # print("https://anytrip.com.au/?selectedTrip=tripInstance%2F{}%2Fau2:st:{}%2F0".format('20200213', trip_name))
+        # 
         latlons[entity.vehicle.trip.trip_id] = (entity.vehicle.position.latitude,
               entity.vehicle.position.longitude)
   return latlons
@@ -57,7 +59,16 @@ def get_filtered_latlons(route_id_filter, feed=get_feed_messages()):
           print(trip, trip_to_route.get(trip),latlon)
           latlons[trip] = latlon
   return latlons
-if __name__ == "__main__":
+
+def get_anytrip_url(trip_id, date=datetime.now().strftime("YMD")):
+    try:
+        trip_name, timetable_id, timetable_version_id, dop_ref, set_type, number_of_cars, trip_instance = trip_id.split(
+            '.')
+    except ValueError:
+        trip_name = trip_id
+    return "https://anytrip.com.au/?selectedTrip=tripInstance%2F{}%2Fau2:st:{}%2F0".format(date, trip_name)
+
+#if __name__ == "__main__":
   #get_feed_messages()
   #get_train_latlons()
-  get_filtered_latlons("IWL_1")
+  #get_filtered_latlons("IWL_1")

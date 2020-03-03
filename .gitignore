@@ -23,3 +23,6 @@ var/
 cookies.txt
 data/gtfs.zip
 gtfs.zip
+
+__pycache__
+*.pyc
