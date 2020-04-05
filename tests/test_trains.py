@@ -1,4 +1,5 @@
 from whereis import trains
+from datetime import datetime
 
 
 def test_feed_messages():
@@ -9,6 +10,7 @@ def test_feed_messages():
 def test_train_latlons():
     train_latlons = trains.get_train_latlons(trains.get_feed_messages(True))
     assert len(train_latlons) == 142
+
 
 def test_trip_to_route():
     train_latlons = trains.get_train_latlons(trains.get_feed_messages(True))
@@ -21,6 +23,7 @@ def test_trip_to_route():
             raise AssertionError(trip, "not found")
     assert trips_with_routes == 124
 
+
 def test_filtered_latlons():
     filtered_latlons = trains.get_filtered_latlons(
         "IWL_1", trains.get_feed_messages(True))
@@ -31,6 +34,7 @@ def test_filtered_latlons():
     filtered_latlons = trains.get_filtered_latlons(
         "IWL_1|BMT_1", trains.get_feed_messages(True))
     assert len(filtered_latlons) == 12
+
 
 def test_filtered_triproutes():
     filtered_triproutes = trains.get_filtered_triproutes(
@@ -43,6 +47,8 @@ def test_filtered_triproutes():
         "IWL_1|BMT_1", trains.get_feed_messages(True))
     assert len(filtered_triproutes) == 12
 
+
 def test_anytrip_url():
     assert trains.get_anytrip_url(
-        'abc123') == "https://anytrip.com.au/?selectedTrip=tripInstance%2FYMD%2Fau2:st:abc123%2F0"
+        'W593.1449.112.2.V.8.60928616') == "https://anytrip.com.au/?selectedTrip=tripInstance%2F{}%2Fau2:st:W593%2F0".format(
+        datetime.now().strftime("%Y%m%d"))

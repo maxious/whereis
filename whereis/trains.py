@@ -67,7 +67,7 @@ def get_filtered_triproutes(route_id_filter, feed=None):
     if re.search(route_id_filter, trip_to_route.get(trip, ''))}
 
 
-def get_anytrip_url(trip_id, date=datetime.now().strftime("YMD")):
+def get_anytrip_url(trip_id, date=datetime.now().strftime("%Y%m%d")):
     try:
         trip_name, timetable_id, timetable_version_id, dop_ref, set_type, number_of_cars, trip_instance = trip_id.split(
             '.')
@@ -79,9 +79,11 @@ def get_anytrip_url(trip_id, date=datetime.now().strftime("YMD")):
 if __name__ == "__main__":
     # get_feed_messages()
     # get_train_latlons()
+
     # print("trip,lon,lat")
     # [print("%s,%s,%s"%(x,lon,lat)) for x,(lat,lon) in get_filtered_latlons("IWL_1|BMT_1", get_feed_messages(True)).items()]
+ 
     print("trip,route,lon,lat")
     it = get_filtered_latlons("IWL_1|BMT_1", get_feed_messages(True)).items()
-    [print("%s,%s,%s,%s"%(x,y['route'],y['lon'],y['lat'])) 
+    [print("%s,%s,%s,%s,%s"%(x,y['route'],y['lon'],y['lat'],get_anytrip_url(x))) 
     for x,y in get_filtered_triproutes("IWL_1|BMT_1", get_feed_messages(True)).items()]
