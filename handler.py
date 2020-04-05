@@ -1,6 +1,7 @@
 import json
 from whereis import maps, trains
 
+
 def hello(event, context):
 
     people_latlons = maps.get_people_latlons()

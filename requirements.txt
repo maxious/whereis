@@ -1,6 +1,6 @@
 gtfs-realtime-bindings
 python-dotenv
 locationsharinglib
-requests
+requests==2.21.0
 tablib
 orjson

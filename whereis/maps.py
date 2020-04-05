@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv(verbose=True)
 
 
-def get_people_latlons() {
+def get_people_latlons():
     service = Service(cookies_file='cookies.txt',
                       authenticating_account=os.getenv('GOOGLE_ACCOUNT_EMAIL'))
     people = {}
