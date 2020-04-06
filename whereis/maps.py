@@ -10,9 +10,9 @@ def get_people_latlons():
     people = {}
     for person in service.get_all_people():
         people[person.nickname] = {
-            'latitude': person.latitude, 'longitude': person.longitude}
+            'lat': person.latitude, 'lon': person.longitude}
         print(person.nickname, person.latitude, person.longitude)
     return people
 
 if __name__ == "__main__":
-  get_feed_messages()
+  get_people_latlons()
